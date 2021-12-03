@@ -4,6 +4,10 @@
   "bin": {
     "yarn-maintain": "dist/cjs/yarn-maintain.js"
   },
+  "files": [
+    "dist/cjs",
+    "dist/esm"
+  ],
   "dependencies": {
     "@yarnpkg/lockfile": "^1.0.0",
     "fp-ts": "^2.0.0",
