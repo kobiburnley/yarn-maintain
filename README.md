@@ -1,13 +1,6 @@
-# yarn-maintain
+# yarn-maintain-monorepo
 
-Maintain `yarn.lock`
+## Packages
 
-### Usage
+- [yarn-maintain](./packages/yarn-maintain)
 
-```
-npx yarn-maintain [flags]
-```
-
-### Options:
-
-- `--m, --module, --modules` Comma seperated list of module names to remove from lock file
