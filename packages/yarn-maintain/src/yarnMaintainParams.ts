@@ -1,4 +1,4 @@
 export interface YarnMaintainParams {
-  lockfileString: string;
+  lockfileString: string
   modules: string[]
 }

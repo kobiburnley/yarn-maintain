@@ -7,8 +7,8 @@
   "scripts": {
     "start": "isbt start",
     "build": "isbt",
-    "lint": "isbt lint",
-    "test": "yarn workspaces run jest",
+    "lint": "yarn workspaces run isbt lint . --passWithNoTests",
+    "test": "yarn workspaces run jest --passWithNoTests",
     "release": "lerna publish --message \"Publish [skip ci]\" --conventional-commits"
   },
   "devDependencies": {
