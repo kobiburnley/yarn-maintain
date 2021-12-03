@@ -1,6 +1,6 @@
 {
   "name": "yarn-maintain",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "bin": {
     "yarn-maintain": "dist/cjs/yarn-maintain.js"
   },
