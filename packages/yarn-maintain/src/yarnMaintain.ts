@@ -13,17 +13,16 @@ export function yarnMaintain({ lockfileString, modules }: YarnMaintainParams) {
     Record<string, undefined> | undefined
   >
 
+  const modulesAt = modules.map((m) => `${m}@`)
+
   for (const installedModule of Object.keys(lockfile)) {
-    for (const module of modules) {
-      const st = `${module}@`
-      if (installedModule.startsWith(st)) {
+    for (const moduleAt of modulesAt) {
+      if (installedModule.startsWith(moduleAt)) {
         lockfile[installedModule] = undefined
         break
       }
     }
   }
-
-
 
   return stringify(lockfile)
 }
