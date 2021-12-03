@@ -11,5 +11,6 @@
     "fp-ts": "^2.0.0",
     "io-ts": "^2.0.0",
     "minimist": "^1.0.0"
-  }
+  },
+  "repository": "https://github.com/kobiburnley/yarn-maintain"
 }
