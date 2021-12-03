@@ -1,0 +1,28 @@
+{
+  "name": "monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "isbt start",
+    "build": "isbt",
+    "lint": "yarn workspaces run isbt lint . --passWithNoTests",
+    "test": "yarn workspaces run jest --passWithNoTests",
+    "release": "lerna publish --message \"Publish [skip ci]\" --conventional-commits"
+  },
+  "devDependencies": {
+    "@isbt/core": "^1.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json}": [
+      "prettier --write"
+    ]
+  },
+  "version": "0.0.0"
+}
