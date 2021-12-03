@@ -6,7 +6,8 @@
   },
   "files": [
     "dist/cjs",
-    "dist/esm"
+    "dist/esm",
+    "README.md"
   ],
   "dependencies": {
     "@yarnpkg/lockfile": "^1.0.0",
