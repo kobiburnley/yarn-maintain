@@ -1,5 +1,5 @@
 {
-  "name": "monorepo",
+  "name": "yarn-maintain-monorepo",
   "private": true,
   "workspaces": [
     "packages/*"

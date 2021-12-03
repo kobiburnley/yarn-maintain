@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import minimist from 'minimist'
 import {
   isYarnMaintainCLIHelpArgs,
@@ -28,7 +30,7 @@ Usage: yarn-maintain [flags]
 
 Options: 
 
-  --m, --module, --modules    Comma seperated list of module names to remove from lock file 
+  -m, --module, --modules    Comma seperated list of module names to remove from lock file 
 `)
       return
     }
