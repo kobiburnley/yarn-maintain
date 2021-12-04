@@ -956,14 +956,14 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@isbt/core@^1.16.0":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@isbt/core/-/core-1.16.0.tgz#b40b7caf8d175ece66d711aa633ae83ae81e42fb"
-  integrity sha512-D41muIGNfiyuLgrEAryMr4ZGIjRVwczjuVdpG2H3BzQXvbsngyDlegkv0fmmAuqZdSi2k0qU7zSkCEimKhgzug==
+"@isbt/core@^1.17.0":
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@isbt/core/-/core-1.17.0.tgz#97a629da1ef83a184f8b7f1280c7263686d28884"
+  integrity sha512-dOFMdDO85/clEk4E4swb58PycuDCPK7wg7/RpjF3PzgrGiUNTaMOlqZ+rIc9EhG82Mj1Me23ADXLYil8awItVA==
   dependencies:
     "@babel/preset-env" "^7.0.0"
     "@babel/preset-typescript" "^7.0.0"
-    "@isbt/workspaces-meta" "1.15.0"
+    "@isbt/workspaces-meta" "1.16.0"
     "@lerna/cli" "^4.0.0"
     "@lerna/exec" "^4.0.0"
     "@types/jest" "^27.0.0"
@@ -985,10 +985,10 @@
     tslib "^2.0.0"
     typescript "^4.0.0"
 
-"@isbt/workspaces-meta@1.15.0":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@isbt/workspaces-meta/-/workspaces-meta-1.15.0.tgz#1a41a040ac771507e9f36d7e380351d8e49932a5"
-  integrity sha512-uvCk/KREj1dI5usk+p0i4r2hVIp1LNJIEMCrg1PRhJgA9lb8PgNqUe2A4wfqfsfj7MRr30Y4OKizb9Eh9tMvgA==
+"@isbt/workspaces-meta@1.16.0":
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@isbt/workspaces-meta/-/workspaces-meta-1.16.0.tgz#550e27a4ac59f48659115bcf796323d1e1f7c6e5"
+  integrity sha512-mk6KwxUh5FI21R7zkxJ9GeO/zna/YLrlOcyNiIa+kZlHKipjt54E0VyvGK9nFTdkKSfADeLZhmHS2c37bAKskg==
   dependencies:
     fp-ts "^2.11.1"
     globby "^11.0.0"
