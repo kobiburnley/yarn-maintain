@@ -6,13 +6,16 @@
   ],
   "scripts": {
     "start": "isbt start",
-    "build": "isbt",
+    "build": "isbt build",
+    "bundle": "yarn workspaces run isbt bundle",
     "lint": "yarn workspaces run isbt lint . --passWithNoTests",
     "test": "yarn workspaces run jest --passWithNoTests",
-    "release": "lerna publish --message \"Publish [skip ci]\" --conventional-commits"
+    "release:no-git": "yarn release --force-publish",
+    "release:rc": "yarn release:no-git --canary --preid rc --dist-tag rc",
+    "release": "lerna publish --message \"Publish [skip ci]\" --exact --conventional-commits"
   },
   "devDependencies": {
-    "@isbt/core": "^1.6.0"
+    "@isbt/core": "^1.16.0"
   },
   "husky": {
     "hooks": {

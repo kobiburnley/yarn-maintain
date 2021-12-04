@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import minimist from 'minimist'
 import {
   isYarnMaintainCLIHelpArgs,
@@ -12,6 +10,7 @@ import { PathReporter } from 'io-ts/lib/PathReporter'
 import { promises as fs } from 'fs'
 
 import { yarnMaintain } from './yarnMaintain'
+
 ;(async () => {
   try {
     const argsEither = yarnMaintainCLIArgsOrHelp.decode(

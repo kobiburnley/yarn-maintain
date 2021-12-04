@@ -35,7 +35,7 @@ jobs:
       - run: yarn install --immutable
       - name: build
         if: steps.build-cache.outputs.cache-hit != 'true'
-        run: yarn run isbt
+        run: yarn run isbt && yarn workspaces run isbt bundle
 
   lint:
     needs: install
