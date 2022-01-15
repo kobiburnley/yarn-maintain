@@ -14,28 +14,41 @@ export const yarnMaintainCLIHelpArgs = t.union(
   'YarnMaintainCLIArgs',
 )
 
+const stringOrArray = orArray(optional(t.string))
+
 export const yarnMaintainCLIArgs = t.type(
   {
     h: t.undefined,
     help: t.undefined,
-    m: orArray(optional(t.string)),
-    module: orArray(optional(t.string)),
-    modules: orArray(optional(t.string)),
+    m: stringOrArray,
+    module: stringOrArray,
+    modules: stringOrArray,
+
+    f: stringOrArray,
+    filter: stringOrArray,
+    filters: stringOrArray,
+
+    s: stringOrArray,
+    scope: stringOrArray,
+    scopes: stringOrArray,
   },
   'YarnMaintainCLIArgs',
 )
 
-export function toYarnMaintainParams({
-  m,
-  module,
-  modules,
-}: t.TypeOf<typeof yarnMaintainCLIArgs>) {
+function flatOrArrayCommaString(a: t.TypeOf<typeof stringOrArray>) {
+  return Array.isArray(a)
+    ? a.flatMap((s) => s?.split(',') ?? [])
+    : a?.split(',') ?? []
+}
+
+export function toYarnMaintainParams(
+  args: t.TypeOf<typeof yarnMaintainCLIArgs>,
+) {
+  const { m, module, modules, f, filter, filters, s, scope, scopes } = args
   return {
-    modules: [m, module, modules].flatMap((a) =>
-      Array.isArray(a)
-        ? a.flatMap((s) => s?.split(',') ?? [])
-        : a?.split(',') ?? [],
-    ),
+    modules: [m, module, modules].flatMap(flatOrArrayCommaString),
+    filters: [f, filter, filters].flatMap(flatOrArrayCommaString),
+    scopes: [s, scope, scopes].flatMap(flatOrArrayCommaString),
   }
 }
 
