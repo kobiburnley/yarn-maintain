@@ -7728,6 +7728,8 @@ __metadata:
   resolution: "yarn-maintain-monorepo@workspace:."
   dependencies:
     "@isbt/core": ^1.17.0
+    husky: ^7.0.0
+    jest: ^27.0.0
   languageName: unknown
   linkType: soft
 
