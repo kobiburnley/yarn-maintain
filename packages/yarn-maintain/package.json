@@ -1,9 +1,7 @@
 {
   "name": "yarn-maintain",
   "version": "1.0.4",
-  "bin": {
-    "yarn-maintain": "dist/bundles/node/cli.js"
-  },
+  "bin": "dist/bundles/node/cli.js",
   "files": [
     "src",
     "dist/bundles/node/cli.js",
