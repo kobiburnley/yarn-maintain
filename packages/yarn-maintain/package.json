@@ -2,11 +2,11 @@
   "name": "yarn-maintain",
   "version": "1.0.4",
   "bin": {
-    "yarn-maintain": "dist/cjs/cli.js"
+    "yarn-maintain": "dist/bundles/node/cli.js"
   },
   "files": [
-    "dist/cjs",
-    "dist/esm",
+    "src",
+    "dist/bundles/node/cli.js",
     "README.md"
   ],
   "dependencies": {
