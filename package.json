@@ -17,6 +17,9 @@
   "devDependencies": {
     "@isbt/core": "^1.17.0"
   },
+  "resolutions": {
+    "husky": "^7.0.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
