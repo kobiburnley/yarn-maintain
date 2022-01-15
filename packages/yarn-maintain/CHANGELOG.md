@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/kobiburnley/yarn-maintain/compare/yarn-maintain@1.1.0...yarn-maintain@1.2.0) (2022-01-15)
+
+**Note:** Version bump only for package yarn-maintain
+
+
+
+
+
 # [1.1.0](https://github.com/kobiburnley/yarn-maintain/compare/yarn-maintain@1.0.4...yarn-maintain@1.1.0) (2022-01-15)
 
 **Note:** Version bump only for package yarn-maintain
