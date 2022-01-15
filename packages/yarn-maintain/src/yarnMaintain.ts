@@ -1,7 +1,9 @@
 import { YarnMaintainParams } from './yarnMaintainParams'
 import { parse, stringify } from '@yarnpkg/lockfile'
+import { permute } from './util/permute'
 
-export function yarnMaintain({ lockfileString, modules }: YarnMaintainParams) {
+export function yarnMaintain(params: YarnMaintainParams) {
+  const { lockfileString, modules, scopes, filters } = params
   const lockfileEither = parse(lockfileString)
 
   if (lockfileEither.type !== 'success') {
@@ -13,14 +15,31 @@ export function yarnMaintain({ lockfileString, modules }: YarnMaintainParams) {
     Record<string, undefined> | undefined
   >
 
-  const modulesAt = modules.map((m) => `${m}@`)
+  const modulesP = modules.length ? modules.map((m) => `${m}@`) : [null] as (string | null)[];
+  const scopesP = scopes.length ? scopes : [null] as (string | null)[];
+  const filtersP = filters.length ? filters.map(f => new RegExp(f)) : [null] as (RegExp | null)[];
+
+  const and = permute(
+    [modulesP, scopesP, filtersP]
+  )
 
   for (const installedModule of Object.keys(lockfile)) {
-    for (const moduleAt of modulesAt) {
-      if (installedModule.startsWith(moduleAt)) {
-        lockfile[installedModule] = undefined
-        break
+    for (const [moduleAt, scope, filter] of and) {
+      console.log({moduleAt, scope, filter: filter?.toString()})
+      if (moduleAt && !installedModule.startsWith(moduleAt)) {
+        continue
       }
+
+      if (scope && !installedModule.startsWith(`@${scope}`)) {
+        continue
+      }
+
+      if (filter && !installedModule.match(filter)) {
+        continue
+      }
+
+      lockfile[installedModule] = undefined
+      break
     }
   }
 
