@@ -1,19 +1,46 @@
 import { YarnMaintainParams } from './yarnMaintainParams'
 import { parse, stringify } from '@yarnpkg/lockfile'
+import { parseSyml, stringifySyml } from '@yarnpkg/parsers'
 import { permute } from './util/permute'
+import { promises as fs } from 'fs'
+import { readYarnVersion } from './readYarnVersion'
+import { isRight } from 'fp-ts/Either'
+import { tryCatch } from 'fp-error'
+import { isLeft } from 'fp-ts/lib/Either'
 
-export function yarnMaintain(params: YarnMaintainParams) {
-  const { lockfileString, modules, scopes, filters } = params
-  const lockfileEither = parse(lockfileString)
+type YarnLock = Record<string, Record<string, undefined> | undefined>
 
-  if (lockfileEither.type !== 'success') {
-    throw new Error(lockfileEither.object)
+export async function yarnMaintain(params: YarnMaintainParams) {
+  const { modules, scopes, filters } = params
+
+  const [lockfileString, yarnVersionEither] = await Promise.all([
+    fs.readFile('yarn.lock', 'utf8'),
+    readYarnVersion(),
+  ])
+
+  const yaml = isRight(yarnVersionEither)
+    ? yarnVersionEither.right.startsWith('3')
+    : false
+
+  const yarnLockEither = tryCatch(() => {
+    if (yaml) {
+      return parseSyml(lockfileString) as YarnLock
+    }
+
+    const lockfileEither = parse(lockfileString)
+
+    if (lockfileEither.type !== 'success') {
+      throw new Error(lockfileEither.object)
+    }
+
+    return lockfileEither.object as YarnLock
+  })
+
+  if (isLeft(yarnLockEither)) {
+    throw yarnLockEither.left
   }
 
-  const lockfile = lockfileEither.object as Record<
-    string,
-    Record<string, undefined> | undefined
-  >
+  const yarnLock = yarnLockEither.right
 
   const modulesP = modules.length
     ? modules.map((m) => `${m}@`)
@@ -25,7 +52,7 @@ export function yarnMaintain(params: YarnMaintainParams) {
 
   const and = permute([modulesP, scopesP, filtersP])
 
-  for (const installedModule of Object.keys(lockfile)) {
+  for (const installedModule of Object.keys(yarnLock)) {
     for (const [moduleAt, scope, filter] of and) {
       if (moduleAt && !installedModule.startsWith(moduleAt)) {
         continue
@@ -39,10 +66,12 @@ export function yarnMaintain(params: YarnMaintainParams) {
         continue
       }
 
-      lockfile[installedModule] = undefined
+      yarnLock[installedModule] = undefined
       break
     }
   }
-
-  return stringify(lockfile)
+  await fs.writeFile(
+    'yarn.lock',
+    yaml ? stringifySyml(yarnLock) : stringify(yarnLock),
+  )
 }

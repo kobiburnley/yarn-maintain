@@ -7,8 +7,6 @@ import {
 import { isLeft } from 'fp-ts/lib/Either'
 import { PathReporter } from 'io-ts/lib/PathReporter'
 
-import { promises as fs } from 'fs'
-
 import { yarnMaintain } from './yarnMaintain'
 ;(async () => {
   try {
@@ -28,17 +26,16 @@ Usage: yarn-maintain [flags]
 
 Options: 
 
-  -m, --module, --modules    Comma seperated list of module names to remove from lock file 
+  -m, --module, --modules    Comma seperated list of module names 
+  -f, --filter, --filter     Comma seperated list of regex patterns 
+  -s, --scope, --scopes      Comma seperated list of package scopes
 `)
       return
     }
 
-    const newLockfileString = yarnMaintain({
+    await yarnMaintain({
       ...toYarnMaintainParams(args),
-      lockfileString: await fs.readFile('yarn.lock', 'utf8'),
     })
-
-    await fs.writeFile('yarn.lock', newLockfileString)
   } catch (e) {
     console.error(e)
     process.exitCode = 1
