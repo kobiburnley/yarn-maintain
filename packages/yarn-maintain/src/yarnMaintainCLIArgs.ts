@@ -44,7 +44,7 @@ function flatOrArrayCommaString(a: t.TypeOf<typeof stringOrArray>) {
 export function toYarnMaintainParams(
   args: t.TypeOf<typeof yarnMaintainCLIArgs>,
 ) {
-  const { m, module, modules, f, filter, filters, s, scope, scopes} = args
+  const { m, module, modules, f, filter, filters, s, scope, scopes } = args
   return {
     modules: [m, module, modules].flatMap(flatOrArrayCommaString),
     filters: [f, filter, filters].flatMap(flatOrArrayCommaString),
