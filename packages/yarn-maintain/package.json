@@ -7,8 +7,16 @@
     "dist/bundles/node/cli.js",
     "README.md"
   ],
+  "scripts": {
+    "bundle": "isbt bundle",
+    "lint": "isbt lint . --passWithNoTests",
+    "test": "jest --passWithNoTests"
+  },
   "dependencies": {
+    "@types/js-yaml": "^4.0.0",
     "@yarnpkg/lockfile": "^1.0.0",
+    "@yarnpkg/parsers": "^2.0.0",
+    "fp-error": "^1.0.0",
     "fp-ts": "^2.0.0",
     "io-ts": "^2.0.0",
     "minimist": "^1.0.0",

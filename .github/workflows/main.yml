@@ -35,7 +35,7 @@ jobs:
       - run: yarn install --immutable
       - name: build
         if: steps.build-cache.outputs.cache-hit != 'true'
-        run: yarn run isbt && yarn workspaces run isbt bundle
+        run: yarn build && yarn bundle
 
   lint:
     needs: install
@@ -47,7 +47,7 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - name: lint
-        run: yarn workspaces run isbt lint . --passWithNoTests
+        run: yarn lint
 
   test:
     needs: build
@@ -65,7 +65,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/src/**/*.ts*') }}
       - run: yarn install --immutable
       - name: test
-        run: yarn workspaces run jest --passWithNoTests
+        run: yarn test
 
   publish:
     needs: [build, test]

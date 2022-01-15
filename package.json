@@ -7,15 +7,21 @@
   "scripts": {
     "start": "isbt start",
     "build": "isbt build",
-    "bundle": "yarn workspaces run isbt bundle",
-    "lint": "yarn workspaces run isbt lint . --passWithNoTests",
-    "test": "yarn workspaces run jest --passWithNoTests",
+    "bundle": "yarn workspaces foreach run bundle",
+    "lint": "yarn workspaces foreach run lint",
+    "test": "yarn workspaces foreach run test",
     "release:no-git": "yarn release --force-publish",
     "release:rc": "yarn release:no-git --canary --preid rc --dist-tag rc",
     "release": "lerna publish --message \"Publish [skip ci]\" --exact --conventional-commits"
   },
   "devDependencies": {
-    "@isbt/core": "^1.17.0"
+    "@isbt/core": "^1.17.0",
+    "husky": "^7.0.0",
+    "jest": "^27.0.0"
+  },
+  "resolutions": {
+    "husky": "^7.0.0",
+    "jest": "^27.0.0"
   },
   "husky": {
     "hooks": {
