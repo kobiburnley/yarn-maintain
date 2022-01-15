@@ -15,17 +15,18 @@ export function yarnMaintain(params: YarnMaintainParams) {
     Record<string, undefined> | undefined
   >
 
-  const modulesP = modules.length ? modules.map((m) => `${m}@`) : [null] as (string | null)[];
-  const scopesP = scopes.length ? scopes : [null] as (string | null)[];
-  const filtersP = filters.length ? filters.map(f => new RegExp(f)) : [null] as (RegExp | null)[];
+  const modulesP = modules.length
+    ? modules.map((m) => `${m}@`)
+    : ([null] as (string | null)[])
+  const scopesP = scopes.length ? scopes : ([null] as (string | null)[])
+  const filtersP = filters.length
+    ? filters.map((f) => new RegExp(f))
+    : ([null] as (RegExp | null)[])
 
-  const and = permute(
-    [modulesP, scopesP, filtersP]
-  )
+  const and = permute([modulesP, scopesP, filtersP])
 
   for (const installedModule of Object.keys(lockfile)) {
     for (const [moduleAt, scope, filter] of and) {
-      console.log({moduleAt, scope, filter: filter?.toString()})
       if (moduleAt && !installedModule.startsWith(moduleAt)) {
         continue
       }
