@@ -8,7 +8,6 @@ import { isRight } from 'fp-ts/Either'
 import { tryCatch } from 'fp-error'
 import { isLeft } from 'fp-ts/lib/Either'
 import { satisfies } from 'semver'
-type YarnLock = Record<string, Record<string, undefined> | undefined>
 
 export async function yarnMaintain(params: YarnMaintainParams) {
   const { modules, scopes, filters } = params
@@ -24,16 +23,16 @@ export async function yarnMaintain(params: YarnMaintainParams) {
 
   const yarnLockEither = tryCatch(() => {
     if (yaml) {
-      return parseSyml(lockfileString) as YarnLock
+      return parseSyml(lockfileString)
     }
 
     const lockfileEither = parse(lockfileString)
 
     if (lockfileEither.type !== 'success') {
-      throw new Error(lockfileEither.object)
+      throw new Error('Failed to parse yarn.lock')
     }
 
-    return lockfileEither.object as YarnLock
+    return lockfileEither.object
   })
 
   if (isLeft(yarnLockEither)) {
