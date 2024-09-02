@@ -7,7 +7,7 @@ import { readYarnVersion } from './readYarnVersion'
 import { isRight } from 'fp-ts/Either'
 import { tryCatch } from 'fp-error'
 import { isLeft } from 'fp-ts/lib/Either'
-
+import { satisfies } from 'semver'
 type YarnLock = Record<string, Record<string, undefined> | undefined>
 
 export async function yarnMaintain(params: YarnMaintainParams) {
@@ -19,7 +19,7 @@ export async function yarnMaintain(params: YarnMaintainParams) {
   ])
 
   const yaml = isRight(yarnVersionEither)
-    ? yarnVersionEither.right.startsWith('3')
+    ? satisfies(yarnVersionEither.right, '>=3.0.0')
     : false
 
   const yarnLockEither = tryCatch(() => {
