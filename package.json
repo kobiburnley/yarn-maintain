@@ -7,9 +7,9 @@
   "scripts": {
     "start": "isbt start",
     "build": "isbt build",
-    "bundle": "yarn workspaces foreach run bundle",
-    "lint": "yarn workspaces foreach run lint",
-    "test": "yarn workspaces foreach run test",
+    "bundle": "yarn workspaces foreach -Apv --topological-dev run bundle",
+    "lint": "yarn workspaces foreach -Apv --topological-dev run lint",
+    "test": "yarn workspaces foreach -Apv --topological-dev run test",
     "release:no-git": "yarn release --force-publish",
     "release:rc": "yarn release:no-git --canary --preid rc --dist-tag rc",
     "release": "lerna publish --message \"Publish [skip ci]\" --exact --conventional-commits"
